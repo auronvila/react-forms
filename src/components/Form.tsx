@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 interface FormValues {
@@ -12,6 +12,8 @@ interface FormValues {
   hobbies: {
     hobby: string;
   }[];
+  age: number;
+  date: Date;
 }
 
 const defaultValueData = async (): Promise<FormValues> => {
@@ -26,6 +28,8 @@ const defaultValueData = async (): Promise<FormValues> => {
     },
     phoneNumbers: ["", ""],
     hobbies: [{ hobby: "" }],
+    age: 1,
+    date: new Date(),
   };
 };
 export default function Form() {
@@ -38,15 +42,19 @@ export default function Form() {
     control,
   });
 
-  const { errors } = formState;
+  const { errors, isDirty, isValid } = formState;
 
   const onSubmit = (data: FormValues) => {
     console.log("submitedd", data);
   };
 
+  const onError = (errors: FieldErrors<FormValues>) => {
+    console.log("form error", errors);
+  };
+
   return (
     <div className="flex justify-center align-middle">
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <span className="flex justify-start">
           <label className="text-white">username</label>
         </span>
@@ -151,7 +159,39 @@ export default function Form() {
           </div>
         </div>
 
-        <button className=" px-5 border-2 bg-blue-400 mt-4" type="submit">
+        <div>
+          <label className="text-white mt-4">Age</label>
+          <input
+            className="flex"
+            {...register("age", {
+              valueAsNumber: true,
+              required: "Age is required",
+            })}
+            id="age"
+            type="number"
+          />
+          <p className="text-red-700">{errors.age?.message}</p>
+        </div>
+
+        <div>
+          <label className="text-white mt-4">Date of the day</label>
+          <input
+            className="flex"
+            {...register("date", {
+              valueAsDate: true,
+              required: "Date of the Day is required",
+            })}
+            id="date"
+            type="date"
+          />
+          <p className="text-red-700">{errors.date?.message}</p>
+        </div>
+
+        <button
+          disabled={!isDirty || !isValid}
+          className=" px-5 border-2 bg-blue-400 mt-4"
+          type="submit"
+        >
           submit
         </button>
       </form>
