@@ -1,5 +1,6 @@
 import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
 
 interface FormValues {
   username: string;
@@ -33,20 +34,30 @@ const defaultValueData = async (): Promise<FormValues> => {
   };
 };
 export default function Form() {
-  const { register, control, handleSubmit, formState } = useForm<FormValues>({
-    defaultValues: defaultValueData,
-  });
+  const { register, control, handleSubmit, formState, reset } =
+    useForm<FormValues>({
+      defaultValues: defaultValueData,
+    });
 
   const { fields, append, remove } = useFieldArray({
     name: "hobbies",
     control,
   });
 
-  const { errors, isDirty, isValid } = formState;
+  const { errors, isDirty, isValid, isSubmitting, isSubmitSuccessful } =
+    formState;
 
   const onSubmit = (data: FormValues) => {
-    console.log("submitedd", data);
+    setTimeout(() => {
+      console.log("submitedd", data);
+    }, 1000);
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const onError = (errors: FieldErrors<FormValues>) => {
     console.log("form error", errors);
@@ -188,7 +199,7 @@ export default function Form() {
         </div>
 
         <button
-          disabled={!isDirty || !isValid}
+          disabled={!isDirty || !isValid || isSubmitting}
           className=" px-5 border-2 bg-blue-400 mt-4"
           type="submit"
         >
