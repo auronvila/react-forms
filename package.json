@@ -12,9 +12,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.2",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "react-hook-form": "^7.45.2"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
