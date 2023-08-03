@@ -64,7 +64,7 @@ export default function Form() {
   };
 
   return (
-    <div className="flex justify-center align-middle">
+    <span className="flex justify-center align-middle">
       <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <span className="flex justify-start">
           <label className="text-white">username</label>
@@ -207,6 +207,6 @@ export default function Form() {
         </button>
       </form>
       <DevTool control={control} />
-    </div>
+    </span>
   );
 }
