@@ -67,10 +67,10 @@ export default function Form() {
     <span className="flex justify-center align-middle">
       <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <span className="flex justify-start">
-          <label className="text-white">username</label>
+          <label className="">username</label>
         </span>
         <input
-          className="flex"
+          className="flex border"
           {...register("username", {
             required: "username is required",
           })}
@@ -80,9 +80,9 @@ export default function Form() {
         <p className="text-red-700">{errors.username?.message}</p>
         <span className="flex justify-start mt-4"></span>
         <div>
-          <label className="text-white">password</label>
+          <label className="">password</label>
           <input
-            className="flex"
+            className="flex border"
             {...register("password", {
               required: "password is required",
             })}
@@ -91,10 +91,10 @@ export default function Form() {
           />
           <p className="text-red-700">{errors.password?.message}</p>
         </div>
-        <div>
-          <label className="text-white mt-4">Instagram</label>
+        <div className=" mt-2">
+          <label>Instagram</label>
           <input
-            className="flex "
+            className="flex border"
             {...register("social.instagram", {
               required: "instagram is required",
             })}
@@ -103,10 +103,10 @@ export default function Form() {
           />
           <p className="text-red-700">{errors.social?.instagram?.message}</p>
         </div>
-        <div>
-          <label className="text-white mt-4">threads</label>
+        <div className=" mt-2">
+          <label className=" mt-4">threads</label>
           <input
-            className="flex "
+            className="flex border "
             {...register("social.threads", {
               required: "threads is required",
             })}
@@ -115,10 +115,10 @@ export default function Form() {
           />
           <p className="text-red-700">{errors.social?.threads?.message}</p>
         </div>
-        <div>
-          <label className="text-white mt-4">Phone number 1</label>
+        <div className=" mt-2">
+          <label className=" mt-4">Phone number 1</label>
           <input
-            className="flex "
+            className="flex border "
             {...register("phoneNumbers.0", {
               required: "Primary phone is required",
             })}
@@ -129,9 +129,9 @@ export default function Form() {
         </div>
 
         <div>
-          <label className="text-white mt-4">Phone number 1</label>
+          <label className=" mt-4">Phone number 1</label>
           <input
-            className="flex"
+            className="flex border"
             {...register("phoneNumbers.1", {
               required: "Secondary phone is required",
             })}
@@ -142,12 +142,15 @@ export default function Form() {
         </div>
 
         <div>
-          <label className="text-white">List of Hobbies</label>
+          <label className="">List of Hobbies</label>
           <div>
             {fields.map((field, index) => {
               return (
                 <div key={field.id}>
-                  <input {...register(`hobbies.${index}.hobby`)} />
+                  <input
+                    className="border"
+                    {...register(`hobbies.${index}.hobby`)}
+                  />
                   {index > 0 && (
                     <button
                       className=" px-5 border-2 bg-blue-700 mt-4"
@@ -171,9 +174,9 @@ export default function Form() {
         </div>
 
         <div>
-          <label className="text-white mt-4">Age</label>
+          <label className=" mt-4">Age</label>
           <input
-            className="flex"
+            className="flex border"
             {...register("age", {
               valueAsNumber: true,
               required: "Age is required",
@@ -185,9 +188,9 @@ export default function Form() {
         </div>
 
         <div>
-          <label className="text-white mt-4">Date of the day</label>
+          <label className=" mt-4">Date of the day</label>
           <input
-            className="flex"
+            className="flex border"
             {...register("date", {
               valueAsDate: true,
               required: "Date of the Day is required",

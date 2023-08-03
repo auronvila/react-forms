@@ -30,12 +30,13 @@ export default function YupForm() {
   return (
     <div className="flex justify-center mt-11">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3 className="text-white text-2xl">Yup Form</h3>
+        <h3 className=" text-2xl">Yup Form</h3>
         <br />
-        <label className="text-white">username</label>
+        <label className="">username</label>
         <br />
         <div>
           <input
+            className="border"
             {...register("yupusername", {
               required: "username field is required",
             })}
@@ -44,9 +45,10 @@ export default function YupForm() {
           />
           <p className="text-red-700">{errors.yupusername?.message}</p>
         </div>
-        <label className="text-white">password</label>
+        <label className="">password</label>
         <br />
         <input
+          className="border"
           {...register("yuppassword", {
             required: "password field is required",
           })}
